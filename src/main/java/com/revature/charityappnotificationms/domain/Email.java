@@ -1,8 +1,6 @@
 package com.revature.charityappnotificationms.domain;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.context.annotation.Bean;
 public class Email {
    
     @NotNull
@@ -10,7 +8,7 @@ public class Email {
     private String to;
     private String subject;
     private String text;
-    @Bean
+ 
     public String getTo() {
         return to;
     }
@@ -34,4 +32,9 @@ public class Email {
     public void setText(String text) {
         this.text = text;
     }
+
+	@Override
+	public String toString() {
+		return "Email [to=" + to + ", subject=" + subject + ", text=" + text + "]";
+	}
 }

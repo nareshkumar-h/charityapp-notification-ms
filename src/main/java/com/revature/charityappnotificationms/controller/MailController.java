@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.revature.charityappnotificationms.domain.Email;
 import com.revature.charityappnotificationms.domain.User;
 import com.revature.charityappnotificationms.message.Message;
 import com.revature.charityappnotificationms.service.EmailService;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("mail")
@@ -20,16 +24,20 @@ public class MailController {
 
 	@Autowired
 	private EmailService notificationService;
-
-	@PostMapping("send")
-	public ResponseEntity<Object> mailSender(@RequestBody User user) {
+	
+	@PostMapping("/send")
+	@ApiOperation(value = "sendEmail API")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Email sent successfully", response = User.class),
+	        @ApiResponse(code = 400, message = "Email not sent", response = Message.class) })
+	public ResponseEntity<Object> mailSender(@RequestBody Email email) {
 		String errorMessage = null;
-		System.out.println(user);
+		System.out.println(email);
 		try {
-			//notificationService.sendMail(user);
-
+			notificationService.sendMail(email);
+			System.out.println(email);
 			return new ResponseEntity<Object>( HttpStatus.OK);
 		} catch (MailException mailException) {
+			mailException.printStackTrace();
 			Message message = new Message(errorMessage);
 			return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
 		}
