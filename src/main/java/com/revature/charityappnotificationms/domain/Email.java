@@ -8,8 +8,9 @@ public class Email {
     private String to;
     private String subject;
     private String text;
- 
-    public String getTo() {
+
+
+	public String getTo() {
         return to;
     }
   
@@ -33,8 +34,6 @@ public class Email {
         this.text = text;
     }
 
-	@Override
-	public String toString() {
-		return "Email [to=" + to + ", subject=" + subject + ", text=" + text + "]";
+	
 	}
-}
+

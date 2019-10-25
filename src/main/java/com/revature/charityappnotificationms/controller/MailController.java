@@ -7,6 +7,7 @@ import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.charityappnotificationms.domain.Email;
@@ -43,5 +44,20 @@ public class MailController {
 		}
 
 	}
+	@PostMapping("/registeruser")
+	@ApiOperation(value = "sendEmail API")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Email sent successfully", response = User.class),
+	        @ApiResponse(code = 400, message = "Email not sent", response = Message.class) })
+	public ResponseEntity<Object> registerMail(@RequestBody User user) {
+		String errorMessage = null;
+		System.out.println(user);
+		try {
+			notificationService.sendRegistrationMail(user);
+			return new ResponseEntity<Object>( HttpStatus.OK);
+		} catch (MailException mailException) {
+			mailException.printStackTrace();
+			Message message = new Message(errorMessage);
+			return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+		}
 
-}
+}}

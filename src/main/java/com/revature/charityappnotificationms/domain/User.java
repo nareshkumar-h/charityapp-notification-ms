@@ -2,9 +2,32 @@ package com.revature.charityappnotificationms.domain;
 
 public class User {
     private String email;
-    private String password;
+    private String applicationName;
+    private String name;
     
-    public String getEmail() {
+  
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", applicationName=" + applicationName + ", name=" + name + "]";
+	}
+
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
         return email;
     }
 
@@ -12,13 +35,6 @@ public class User {
         this.email = email;
     }
  
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+   
 }
 

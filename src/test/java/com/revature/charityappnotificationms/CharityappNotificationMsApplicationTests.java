@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.revature.charityappnotificationms.domain.Email;
+import com.revature.charityappnotificationms.domain.User;
 import com.revature.charityappnotificationms.service.EmailService;
 
 @SpringBootTest
@@ -21,6 +22,14 @@ class CharityappNotificationMsApplicationTests {
 		email.setSubject("Test1");
 		email.setText("Text1");
 		emailService.sendMail(email);
+	}
+	@Test
+	void testMailUser() {
+		User email = new User();
+		email.setEmail("jayakrishnakrish1998@gmail.com");
+		email.setName("jayakrishna");
+		email.setApplicationName("charityapp");
+		emailService.sendRegistrationMail(email);
 	}
 
 }
